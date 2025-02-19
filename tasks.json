@@ -1,20 +1,13 @@
 {
-    "todo": [
+    "todo": [],
+    "in_progress": [],
+    "done": [
         {
             "id": 1,
             "description": "cleaning",
-            "status": "todo",
-            "createAt": "2025-02-19T14:27:55.655Z",
-            "updateAt": "2025-02-19T14:27:55.655Z"
-        },
-        {
-            "id": 2,
-            "description": "cleaning",
-            "status": "todo",
-            "createAt": "2025-02-19T14:28:58.908Z",
-            "updateAt": "2025-02-19T14:29:03.163Z"
+            "status": "done",
+            "createAt": "2025-02-19T14:50:40.059Z",
+            "updateAt": "2025-02-19T14:50:40.059Z"
         }
-    ],
-    "in_progress": [],
-    "done": []
+    ]
 }
