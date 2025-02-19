@@ -1,4 +1,4 @@
-import { addTask, updateTask, deleteTask, markATask, showAll } from "./Utils/utils.js";
+import { addTask, updateTask, deleteTask, markATask, showAll, showDoneTasks, showNotDoneTasks, showInProgressTask } from "./Utils/utils.js";
 import readlineSync from 'readline-sync';
 
 function main() {
@@ -10,6 +10,8 @@ function main() {
         console.log("4. Mark a Task")
         console.log("5. Show All Tasks");
         console.log("6. List all done task");
+        console.log("7. Show not Done task");
+        console.log("8. Show not in_progress task");
         console.log("0. Exit");
 
         let choice = readlineSync.question("Choose an option: ").trim();
@@ -25,7 +27,11 @@ function main() {
         } else if (choice === "5") {
             showAll();
         } else if (choice === "6") {
-            
+            showDoneTasks();
+        } else if (choice === "7") {
+            showNotDoneTasks();
+        } else if (choice === "8") {
+            showInProgressTask();
         } else if (choice === "0") {
             console.log("Program ended.");
             return;

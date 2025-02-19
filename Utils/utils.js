@@ -212,3 +212,41 @@ export function showDoneTasks () {
     }
 }
 
+export function showNotDoneTasks () {
+    let tasks = loadTasks();
+
+    if (!tasks || Object.values(tasks).flat().length === 0) {
+        console.log("\n❌ There are no tasks now!");
+        return;
+    }
+
+    if (tasks.todo.length > 0) {
+        console.log("\n🔹 TODO TASKS:");
+        tasks.todo.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No TODO tasks.");
+    }
+
+    if (tasks.in_progress.length > 0) {
+        console.log("\n🚀 IN-PROGRESS TASKS:");
+        tasks.in_progress.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No IN-PROGRESS tasks.");
+    }
+}
+
+export function showInProgressTask () {
+    let tasks = loadTasks();
+
+    if (!tasks || Object.values(tasks).flat().length === 0) {
+        console.log("\n❌ There are no tasks now!");
+        return;
+    }
+
+    if (tasks.in_progress.length > 0) {
+        console.log("\n🚀 IN-PROGRESS TASKS:");
+        tasks.in_progress.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No IN-PROGRESS tasks.");
+    }
+}
