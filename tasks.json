@@ -1,21 +1,13 @@
 {
     "todo": [
         {
-            "id": 2,
-            "description": "Making noise",
+            "id": 1,
+            "description": "Bai tap ve nha",
             "status": "todo",
-            "createAt": "2025-02-19T15:12:03.729Z",
-            "updateAt": "2025-02-19T15:12:03.729Z"
+            "createAt": "2025-02-19T15:44:52.824Z",
+            "updateAt": "2025-02-19T15:44:52.824Z"
         }
     ],
     "in_progress": [],
-    "done": [
-        {
-            "id": 1,
-            "description": "cleaning",
-            "status": "done",
-            "createAt": "2025-02-19T14:50:40.059Z",
-            "updateAt": "2025-02-19T14:50:40.059Z"
-        }
-    ]
+    "done": []
 }

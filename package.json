@@ -9,9 +9,12 @@
   "author": "",
   "license": "CCC",
   "dependencies": {
+    "commander": "^13.1.0",
     "readline-sync": "^1.4.10",
     "uuid": "^11.0.5"
   },
-  "devDependencies": {},
+  "bin": {
+    "task-cli": "./Utils/task-cli.js"
+  },
   "description": ""
 }
