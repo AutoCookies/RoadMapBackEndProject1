@@ -5,8 +5,15 @@ const TASK_FILE = "tasks.json";
 
 export function loadTasks() {
     if (fs.existsSync(TASK_FILE)) {
-        return JSON.parse(fs.readFileSync(TASK_FILE, "utf8"));
+        let rawData = JSON.parse(fs.readFileSync(TASK_FILE, "utf8"));
+        
+        return {
+            todo: rawData.todo.map(task => new Task(task.id, task.description, task.status, task.createAt, task.updateAt)),
+            in_progress: rawData.in_progress.map(task => new Task(task.id, task.description, task.status, task.createAt, task.updateAt)),
+            done: rawData.done.map(task => new Task(task.id, task.description, task.status, task.createAt, task.updateAt))
+        };
     }
+
     return { todo: [], in_progress: [], done: [] };
 }
 
@@ -128,7 +135,7 @@ export function markATask() {
                 break;
             }
         }
-        if (taskFound) break; // Dừng vòng lặp nếu tìm thấy task
+        if (taskFound) break;
     }
 
     if (!taskFound) {
@@ -150,7 +157,6 @@ export function markATask() {
         return;
     }
 
-    // Cập nhật danh sách tasks: xóa task khỏi danh sách cũ và thêm vào danh sách mới
     tasks[taskList] = tasks[taskList].filter(task => task.id !== id);
     tasks[taskFound.status].push(taskFound);
 
@@ -159,5 +165,50 @@ export function markATask() {
 }
 
 export function showAll() {
+    let tasks = loadTasks();
+
+    if (!tasks || Object.values(tasks).flat().length === 0) {
+        console.log("\n❌ There are no tasks now!");
+        return;
+    }
+
+    console.log("\n📌 LIST OF TASKS:");
     
+    if (tasks.todo.length > 0) {
+        console.log("\n🔹 TODO TASKS:");
+        tasks.todo.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No TODO tasks.");
+    }
+
+    if (tasks.in_progress.length > 0) {
+        console.log("\n🚀 IN-PROGRESS TASKS:");
+        tasks.in_progress.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No IN-PROGRESS tasks.");
+    }
+
+    if (tasks.done.length > 0) {
+        console.log("\n✔️ COMPLETED TASKS:");
+        tasks.done.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No COMPLETED tasks.");
+    }
 }
+
+export function showDoneTasks () {
+    let tasks = loadTasks();
+
+    if (!tasks || Object.values(tasks).flat().length === 0) {
+        console.log("\n❌ There are no tasks now!");
+        return;
+    }
+
+    if (tasks.done.length > 0) {
+        console.log("\n✔️ COMPLETED TASKS:");
+        tasks.done.forEach(task => task.printInfo());
+    } else {
+        console.log("\n✅ No COMPLETED tasks.");
+    }
+}
+

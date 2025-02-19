@@ -1,4 +1,4 @@
-import { addTask, updateTask, deleteTask, markATask } from "./Utils/utils.js";
+import { addTask, updateTask, deleteTask, markATask, showAll } from "./Utils/utils.js";
 import readlineSync from 'readline-sync';
 
 function main() {
@@ -9,6 +9,7 @@ function main() {
         console.log("3. Update Task");
         console.log("4. Mark a Task")
         console.log("5. Show All Tasks");
+        console.log("6. List all done task");
         console.log("0. Exit");
 
         let choice = readlineSync.question("Choose an option: ").trim();
@@ -21,6 +22,10 @@ function main() {
             updateTask();
         } else if (choice === "4") {
             markATask();
+        } else if (choice === "5") {
+            showAll();
+        } else if (choice === "6") {
+            
         } else if (choice === "0") {
             console.log("Program ended.");
             return;
