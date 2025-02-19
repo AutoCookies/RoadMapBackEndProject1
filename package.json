@@ -1,0 +1,17 @@
+{
+  "name": "roadmapbackendproject1",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "CCC",
+  "dependencies": {
+    "readline-sync": "^1.4.10",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {},
+  "description": ""
+}
