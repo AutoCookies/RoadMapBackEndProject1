@@ -28,13 +28,11 @@ export function getNextTaskId(tasks) {
     return maxId + 1;
 }
 
-export function addTask() {
+export function addTask(description) {
     let tasks = loadTasks();
 
     const id = getNextTaskId(tasks);
-    const description = readlineSync.question("Enter task description: ").trim();
-
-    if (!description) {
+    if (!description.trim()) {
         console.log("Task description cannot be empty.");
         return;
     }
@@ -45,18 +43,16 @@ export function addTask() {
     tasks.todo.push(task);
     saveTasks(tasks);
 
-    console.log(`Task "${description}" added successfully with ID: ${id}`);
+    console.log(`Task added successfully (ID: ${id})`);
 }
 
-export function deleteTask() {
+export function deleteTask(id) {
     let tasks = loadTasks();
 
     if (Object.values(tasks).flat().length === 0) {
         console.log("There are no tasks now!");
         return;
     }
-
-    const id = parseInt(readlineSync.question("Type in task ID you want to delete: ").trim());
 
     let found = false;
     for (let key of Object.keys(tasks)) {
@@ -76,27 +72,19 @@ export function deleteTask() {
     console.log(`Task with ID ${id} deleted successfully.`);
 }
 
-export function updateTask() {
+export function updateTask(id, newDescription) {
     let tasks = loadTasks();
-
-    if (Object.values(tasks).flat().length === 0) {
-        console.log("There are no tasks now!");
-        return;
-    }
-
-    const id = parseInt(readlineSync.question("Type in task ID you want to update: ").trim());
-
-    let taskFound = null;
-    let taskList = null;
+    let taskFound = false;
 
     for (let key of Object.keys(tasks)) {
-        for (let task of tasks[key]) {
+        tasks[key] = tasks[key].map(task => {
             if (task.id === id) {
-                taskFound = task;
-                taskList = key;
-                break;
+                taskFound = true;
+                task.description = newDescription;
+                task.updateAt = new Date().toISOString();
             }
-        }
+            return task;
+        });
     }
 
     if (!taskFound) {
@@ -104,25 +92,17 @@ export function updateTask() {
         return;
     }
 
-    const newDescription = readlineSync.question("Enter new task description: ").trim();
-    if (newDescription) {
-        taskFound.description = newDescription;
-        taskFound.updateAt = new Date().toISOString();
-    }
-
     saveTasks(tasks);
-    console.log(`Task with ID ${id} updated successfully.`);
+    console.log(`Task updated successfully (ID: ${id})`);
 }
 
-export function markATask() {
+export function markATask(id) {
     let tasks = loadTasks();
 
     if (Object.values(tasks).flat().length === 0) {
         console.log("There are no tasks now!");
         return;
     }
-
-    const id = parseInt(readlineSync.question("Type in task ID you want to update: ").trim());
 
     let taskFound = null;
     let taskList = null;
@@ -235,7 +215,7 @@ export function showNotDoneTasks () {
     }
 }
 
-export function showInProgressTask () {
+export function showInProgressTasks () {
     let tasks = loadTasks();
 
     if (!tasks || Object.values(tasks).flat().length === 0) {
